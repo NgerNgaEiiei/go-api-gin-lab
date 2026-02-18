@@ -35,7 +35,17 @@ func (h *StudentHandler) GetStudentByID(c *gin.Context) {
 func (h *StudentHandler) CreateStudent(c *gin.Context) {
 	var student models.Student
 	if err := c.ShouldBindJSON(&student); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON format"})
+		return
+	}
+
+	if student.Id == "" || student.Name == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "id and name must not be empty"})
+		return
+	}
+
+	if student.GPA < 0.0 || student.GPA > 4.0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "gpa must be between 0.00 and 4.00"})
 		return
 	}
 
