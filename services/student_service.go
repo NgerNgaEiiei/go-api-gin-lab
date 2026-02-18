@@ -30,3 +30,7 @@ func (s *StudentService) UpdateStudent(id string, student models.Student) (model
 	student.Id = id
 	return student, nil
 }
+
+func (s *StudentService) DeleteStudent(id string) error {
+	return s.Repo.DeleteStudent(id)
+}

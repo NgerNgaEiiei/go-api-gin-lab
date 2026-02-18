@@ -65,3 +65,15 @@ func (h *StudentHandler) UpdateStudent(c *gin.Context) {
 
 	c.JSON(http.StatusOK, updatedStudent)
 }
+
+func (h *StudentHandler) DeleteStudent(c *gin.Context) {
+	id := c.Param("id")
+
+	err := h.Service.DeleteStudent(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "student not found"})
+		return
+	}
+
+	c.Status(http.StatusNoContent)
+}

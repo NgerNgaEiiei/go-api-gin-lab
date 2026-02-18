@@ -62,3 +62,17 @@ func (r *StudentRepository) UpdateStudent(id string, s models.Student) error {
 	}
 	return nil
 }
+
+func (r *StudentRepository) DeleteStudent(id string) error {
+	query := `DELETE FROM students WHERE id = ?`
+	result, err := r.DB.Exec(query, id)
+	if err != nil {
+		return err
+	}
+
+	rows, _ := result.RowsAffected()
+	if rows == 0 {
+		return errors.New("student not found")
+	}
+	return nil
+}
