@@ -46,3 +46,22 @@ func (h *StudentHandler) CreateStudent(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, student)
 }
+
+func (h *StudentHandler) UpdateStudent(c *gin.Context) {
+
+	id := c.Param("id")
+	var student models.Student
+
+	if err := c.ShouldBindJSON(&student); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON body"})
+		return
+	}
+
+	updatedStudent, err := h.Service.UpdateStudent(id, student)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "student not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, updatedStudent)
+}
