@@ -45,8 +45,13 @@ func (h *StudentHandler) CreateStudent(c *gin.Context) {
 		return
 	}
 
-	if student.Id == "" || student.Name == "" {
-		sendError(c, http.StatusBadRequest, "id and name must not be empty")
+	if student.Id == "" {
+		sendError(c, http.StatusBadRequest, "id must not be empty")
+		return
+	}
+
+	if student.Name == "" {
+		sendError(c, http.StatusBadRequest, "name must not be empty")
 		return
 	}
 
