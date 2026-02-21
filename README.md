@@ -6,14 +6,21 @@
 ## 📦 Project Structure
 
 ```
-go-api-gin/
-├─ main.go
-├─ models/
-├─ repositories/
-├─ services/
-├─ handlers/
-├─ config/
-└─ students.db
+go-api-gin-lab/
+├── main.go                    # Entry point & Routes
+├── config/
+│   └── database.go            # Database configuration
+├── models/
+│   └── student.go             # Student data model
+├── repositories/
+│   └── student_repository.go  # Database operations
+├── services/
+│   └── student_service.go     # Business logic
+├── handlers/
+│   └── student_handler.go     # HTTP handlers
+├── go.mod                     # Go modules
+├── go.sum                     # Dependencies checksum
+└── students.db                # SQLite database (auto-generated)
 ```
 
 ## 🚀 How to Run
